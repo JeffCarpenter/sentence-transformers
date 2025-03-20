@@ -214,6 +214,10 @@ class SentenceTransformer(nn.Sequential, FitMixin, PeftAdapterMixin):
 
             adapt_transformers_to_gaudi()
 
+        if device == "directml" and importlib.util.find_spec("torch_directml") is not None
+            import torch_directml
+            device = torch_directml.device()
+        
         if model_name_or_path is not None and model_name_or_path != "":
             logger.info(f"Load pretrained SentenceTransformer: {model_name_or_path}")
 
